@@ -115,15 +115,8 @@ Implement an AVL Tree class that exhibits the aforementioned behavior. The tree'
 How does the time complexity of the AVL Tree's insertion method differ from the binary search tree's?
 
 
-if self.right != None:
-            cb(self.value)
-            return self.right.for_each(cb)    
-        if self.left != None:
-            cb(self.value)
-            return self.left.for_each(cb)      
-        if self.right == None:
-            cb(self.value)
-            return    
-        if self.left == None:
-            cb(self.value)
-            return 
+cb(self.value)
+        if self.left:
+            self.left.for_each(cb)
+        if self.right:
+            self.right.for_each(cb)    
