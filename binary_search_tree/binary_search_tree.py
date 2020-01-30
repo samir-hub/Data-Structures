@@ -30,13 +30,11 @@ class BinarySearchTree:
             return True
         elif target < self.value:
             if self.left:
-                print('left')
                 return self.left.contains(target)
             else: 
                 return False    
         elif target > self.value:
             if self.right:
-                print('right')
                 return self.right.contains(target)
             else: 
                 return False 
@@ -52,8 +50,20 @@ class BinarySearchTree:
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
     def for_each(self, cb):
-        pass
-
+        if self.right != None and self.left != None:
+            cb(self.value)
+            self.left.for_each(cb)
+            return self.right.for_each(cb)      
+        if self.right == None and self.left != None:
+            cb(self.value)
+            return self.left.for_each(cb)    
+        if self.right != None and self.left == None:
+            cb(self.value)
+            return self.right.for_each(cb) 
+        if self.right == None and self.left == None:
+            cb(self.value)
+            return  
+            
     # DAY 2 Project -----------------------
 
     # Print all the values in order from low to high
@@ -86,12 +96,18 @@ class BinarySearchTree:
 
 tree = BinarySearchTree(5)
 
+tree.insert(2)
+
 tree.insert(6)
-
+tree.insert(1)
 tree.insert(7)
+tree.insert(3)
+tree.insert(8)
 
 
+arr = []
+cb = lambda x: arr.append(x)
 
-#print(tree.right.right.right.value)
+tree.for_each(cb)
 
-print(tree.get_max())
+print(arr)
